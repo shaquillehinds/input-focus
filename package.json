@@ -1,6 +1,6 @@
 {
   "name": "@shaquillehinds/input-focus",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Quick keyboard aware input focusing for react native.",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
