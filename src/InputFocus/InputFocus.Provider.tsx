@@ -1,5 +1,12 @@
 //$lf-ignore
 import {
+  isIOS,
+  measureAsync,
+  relativeY,
+  useKeyboardListeners,
+  wait,
+} from '@shaquillehinds/react-native-essentials';
+import {
   createContext,
   createRef,
   type MutableRefObject,
@@ -22,10 +29,6 @@ import {
   type ViewStyle,
   Animated,
 } from 'react-native';
-import { measureInputAsync } from './utils/measureInputAsync';
-import { useKeyboardListeners } from './hooks/useKeyboardListeners';
-import { isIOS, relativeY } from './utils/Layout.const';
-import { wait } from './utils/wait';
 
 type InputFocusContextType = {
   focusedTextInputRef: MutableRefObject<TextInput | null>;
@@ -44,6 +47,7 @@ export type InputFocusProviderProps = {
    * Uses Animated.ScrollView as the wrapper if you want to avoid any state rerenders from adding padding.
    */
   useAnimatedScrollView?: boolean;
+  CustomScrollView?: typeof ScrollView;
 };
 
 export function InputFocusProvider(
@@ -65,7 +69,9 @@ export function InputFocusProvider(
   const keyboardHeightRef = useRef(0);
 
   const ViewComponent = useMemo(
-    () => (props.useAnimatedScrollView ? Animated.ScrollView : ScrollView),
+    () =>
+      props.CustomScrollView ||
+      (props.useAnimatedScrollView ? Animated.ScrollView : ScrollView),
     [props.useAnimatedScrollView]
   );
 
@@ -79,7 +85,7 @@ export function InputFocusProvider(
       }
       await wait(100);
       try {
-        const measurements = await measureInputAsync(focusedTextInputRef);
+        const measurements = await measureAsync(focusedTextInputRef);
         measurements && moveFocusTo({ yPos: measurements.pageY });
       } catch (error) {
         console.error(error);
@@ -121,7 +127,7 @@ export function InputFocusProvider(
   const onTextInputFocus = useCallback(
     async (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
       try {
-        const measurements = await measureInputAsync(e);
+        const measurements = await measureAsync(e);
         measurements && moveFocusTo({ yPos: measurements.pageY });
       } catch (error) {
         console.error(error);

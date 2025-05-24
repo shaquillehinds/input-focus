@@ -3338,6 +3338,7 @@ __metadata:
     "@commitlint/config-conventional": ^19.6.0
     "@react-native/eslint-config": ^0.73.1
     "@release-it/conventional-changelog": ^9.0.2
+    "@shaquillehinds/react-native-essentials": ^0.2.0
     "@types/jest": ^29.5.5
     "@types/react": ^18.2.44
     commitlint: ^19.6.1
@@ -3357,6 +3358,16 @@ __metadata:
     react-native: "*"
   languageName: unknown
   linkType: soft
+
+"@shaquillehinds/react-native-essentials@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@shaquillehinds/react-native-essentials@npm:0.2.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: afc373750da05bb5e4a53435bd7801dd45e8c2f0518b33797482cd73253e694395f6e0cec8b64404d444c3a2c36d148bd7d874a28e0628a29be281b64c0928ec
+  languageName: node
+  linkType: hard
 
 "@sinclair/typebox@npm:^0.27.8":
   version: 0.27.8
