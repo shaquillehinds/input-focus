@@ -48,6 +48,7 @@ export type InputFocusProviderProps = {
    */
   useAnimatedScrollView?: boolean;
   CustomScrollView?: typeof ScrollView;
+  additionalKeyboardHeight?: number;
 };
 
 export function InputFocusProvider(
@@ -81,7 +82,9 @@ export function InputFocusProvider(
       if (props.useAnimatedScrollView) {
         paddingBottomRef.current.setValue(keyboardHeightRef.current);
       } else {
-        setPaddingBottom(keyboardHeightRef.current);
+        setPaddingBottom(
+          keyboardHeightRef.current + (props.additionalKeyboardHeight || 0)
+        );
       }
       await wait(100);
       try {
